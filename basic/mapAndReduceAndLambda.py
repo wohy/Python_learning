@@ -16,7 +16,7 @@ theInt1 = str2int1('1234')
 print(theInt1, f'是否数字{is_number(theInt1)}') # 1234 是否数字True
 
 
-DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+DIGITS = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '.': '.'}
 
 def char2num(s: str):
     return DIGITS[s]
@@ -28,3 +28,13 @@ theInt2 = str2int2('12345')
 print(theInt2, f'是否数字{is_number(theInt2)}') # 12345 是否数字True
 
 print(True == 1) # True
+
+def str2float(s: str):
+    decimal = 10 ** (len(s.split('.')[1]) if '.' in s else 1)
+    return reduce(lambda x, y: x * 10 + y if y != '.' else x, map(char2num, s)) / decimal
+
+print('str2float(\'123.456\') =', str2float('123.456'))
+if abs(str2float('123.456') - 123.456) < 0.00001:
+    print('测试成功!')
+else:
+    print('测试失败!')
